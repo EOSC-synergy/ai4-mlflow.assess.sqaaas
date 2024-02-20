@@ -1,0 +1,42 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/2.0.0
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/ai4os/ai4-mlflow:
+      branch: main
+      repo: https://github.com/ai4os/ai4-mlflow
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/ai4os/ai4-mlflow git:
+        commands:
+        - /usr/bin/env sh .sqa/script.dorky-magnolia-lion.sh
+        container: qc.acc_randy-denim-turkey
+  QC.Doc:
+    repos:
+      github.com/ai4os/ai4-mlflow find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.shaky-asparagus-audemer.sh
+        container: qc.doc_fuzzy-goldenrod-hummingbird
+      github.com/ai4os/ai4-mlflow git:
+        commands:
+        - /usr/bin/env sh .sqa/script.surly-burgundy-sloth.sh
+        container: qc.doc_chummy-aquamarine-argentino
+  QC.Lic:
+    repos:
+      github.com/ai4os/ai4-mlflow licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.blurry-myrtle-emu.sh
+        container: qc.lic_surly-amaranth-rottweiler
+  QC.Ver:
+    repos:
+      github.com/ai4os/ai4-mlflow get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.droopy-grey-avocet.sh
+        container: qc.ver_cozy-olivine-mist
+timeout: 5400
